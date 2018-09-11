@@ -14,10 +14,10 @@ void setup()
   y = 250;
   j = 1;
   k = 0;
-  
+
   img = new PImage[9];
-  leftImg = new PImage[8];
-  
+  leftImg = new PImage[9];
+
   for (int i = 0; i < img.length; i++)
   {
     img[i] = loadImage("SeeSnakeMove/Snake" + i + ".gif");
@@ -32,7 +32,6 @@ void setup()
 void draw()
 {
   //image(img[0], x, y, 100, 150);
-  
 }
 
 void keyPressed() 
@@ -41,35 +40,41 @@ void keyPressed()
   {
     if (keyCode == RIGHT) 
     {
-      background(240,240,240);
+      background(240, 240, 240);
       x = x + 10;
-      image(img[j],x,y, 100, 150);
-      if(j == img.length-1)
+      image(img[j], x, y, 100, 150);
+      if (j == img.length-1)
       {
         j = 1;
       }
       j++;
-    }
-    else if (keyCode == LEFT) 
+    } else if (keyCode == LEFT) 
     {
-      background(240,240,240);
+      background(240, 240, 240);
       x = x - 10;
-      image(leftImg[k],x,y, 100, 150);
-      if(k == leftImg.length-1)
+      image(leftImg[k], x, y, 100, 150);
+      if (k == leftImg.length-1)
       {
         k = 0;
       }
       k++;
     }
-  
-    }
   }
+}
 
 
 void keyReleased()
 {
-  background(240,240,240);
-  image(img[0], x, y, 100, 150);
-  j = 1;
-  k = 0;
+  if (keyCode == RIGHT) {
+    background(240, 240, 240);
+    image(img[0], x, y, 100, 150);
+    j = 1;
+    k = 0;
+  }
+  if (keyCode == LEFT) {
+    background(240, 240, 240);
+    image(leftImg[8], x, y, 100, 150);
+    j = 1;
+    k = 0;
+  }
 }
