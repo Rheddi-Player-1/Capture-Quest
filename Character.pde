@@ -6,7 +6,8 @@ class Character
   int charXPos, charYPos;
   int tall, wide, weight;
   int j, k;
-  
+  PImage direction[];
+
   Character(int x, int y, int h, int w, int sp, int j, int wei)
   {
     charXPos = x;
@@ -18,85 +19,87 @@ class Character
     weight = wei;
     j = 1;
     k = 0;
-    
+
     leftImg = new PImage[9];
     rightImg = new PImage[9];
-    
+    direction = new PImage[9];
+
+
     for (int i = 0; i < rightImg.length; i++)
     {
       rightImg[i] = loadImage("SeeSnakeMove/Snake" + i + ".gif");
     }
+
+    direction[0] = rightImg[0];
+
     for (int i = 0; i < leftImg.length; i++)
     {
       leftImg[i] = loadImage("SeeSnakeMove/SnakeLeft" + i + ".gif");
     }
-    
   }
-  
+
   void updateWeight(int wei)
   {
-    if(wei > weight )
+    if (wei > weight )
     {
-       charSpeed = charSpeed - 2;
-       charJump = charJump  - 2;
-    }
-    else if( wei < weight)
+      charSpeed = charSpeed - 2;
+      charJump = charJump  - 2;
+    } else if ( wei < weight)
     {
       charSpeed = charSpeed + 2;
       charJump = charJump + 2;
     }
     weight = wei;
   }
-  
-    
-  
+
+
+
   void moveCharLeft()
   {
-    background(255,255,255);
-      charXPos = charXPos - charSpeed;
-      image(leftImg[k],charXPos,charYPos, wide, tall);
-      if(k == leftImg.length-1)
-      {
-        k = 0;
-      }
-     k++;
+    charXPos = charXPos - charSpeed;
+    direction[0] = leftImg[k];
+    if (k == leftImg.length-1)
+    {
+      k = 0;
+    }
+    k++;
+    redraw();
   }
-  
+
   void moveCharRight()
   {
-    background(255,255,255);
     charXPos = charXPos + charSpeed;
-    image(rightImg[j],charXPos,charYPos, wide, tall);
-    if(j == rightImg.length - 1)
-      {
-        j = 1;
-      }
+    direction[0] = rightImg[j];
+    if (j == rightImg.length - 1)
+    {
+      j = 1;
+    }
     j++;
+    redraw();
   }
-  
+
   void keyReleaseRight()
   {
-    background(255, 255, 255);
-    image(rightImg[0], charXPos, charYPos, wide, tall);
+    direction[0] = rightImg[0];
     j = 1;
     k = 0;
+    redraw();
   }
-  
+
   void keyReleaseLeft()
   {
-    background(255, 255, 255);
-    image(leftImg[0], charXPos, charYPos, wide, tall);
+    direction[0] = leftImg[8];
     j = 1;
     k = 0;
+    redraw();
   }
-  
+
   void moveCharJump()
   {
   }
-  
+
   void initializeChar()
   {
-    image(rightImg[0], charXPos, charYPos, wide, tall);
+    image(direction[0], charXPos, charYPos, wide, tall);
   }
-  
 }
