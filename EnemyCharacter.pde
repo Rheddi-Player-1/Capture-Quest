@@ -2,72 +2,80 @@ class EnemyCharacter
 {
   PImage leftImg[];
   PImage rightImg[];
+  PImage direction[];
   int enemyX;
   int enemyY;
   int destinationX;
   int destinationY;
   int moveSpeed;
-  
+  int left, right;
+
   EnemyCharacter(int x, int y, int dX, int dY, int sp)
   {
     leftImg = new PImage[4];
     rightImg = new PImage[4];
-    
+    direction = new PImage[4];
+
     enemyX = x;
     enemyY = y;
     destinationX = dX;
     destinationY = dY;
     moveSpeed = sp;
-    
-    for(int i = 0; i < leftImg.length; i++)
+    left = enemyX;
+    right = destinationX;
+
+    for (int i = 0; i < leftImg.length; i++)
       leftImg[i] = loadImage("Enemy/EnemyLeft" + i + ".png");
-    for(int i = 0; i < rightImg.length; i++)
+    for (int i = 0; i < rightImg.length; i++)
       rightImg[i] = loadImage("Enemy/EnemyRight" + i + ".png");
+
+    direction[0] = rightImg[0];
   }
-  
+
   void setEnemySpeed(int sp)
   {
     moveSpeed = sp;
   }
-    
+
   void moveEnemy()
   {
-   boolean keepMoving = true;
-   int orginX = enemyX;
-   int orginY = enemyY;
-   int i = 1;
-   int j = 1;
-  
-   while(keepMoving)
-   {
-     if(enemyX < destinationX)
-     {
-       enemyX = enemyX - moveSpeed;
-       image(rightImg[i], enemyX, enemyY);
-       if(i == rightImg.size)
-         i = 1;
-       else
-         i++;
-     }
-     else if(enemyX >= destinationX && enemyX != orginX)
-     {
-       enemyX = enemyX + moveSpeed;
-       image(leftImg[i], enemyX, enemyY);
-       if(j == rightImg.size)
-         j = 1;
-       else
-         j++;
-     }
-       
-   }
+
+
+    int i = 1;
+    int j = 1;
+
+    enemyX = enemyX + moveSpeed;
+    direction[0] = rightImg[i];
+    if (i == leftImg.length-1)
+      i = 1;
+    else
+      i++;
+
+    if (enemyX > right) {
+      moveSpeed = -5;
+      direction[0] = leftImg[j];
+      if (j == rightImg.length-1)
+        j = 1;
+      else
+        j++;
+      redraw();
+    }
+
+    if (enemyX < left)
+    {
+      moveSpeed = 5;
+      direction[0] = rightImg[i];
+      if (i == leftImg.length-1)
+        i = 1;
+      else
+        i++;
+      redraw();
+    }
   }
-  
+
+
   void initializeEnemy()
   {
-    if(enemyX < destinationX)
-      image(rightImg[0], enemyX, enemyY);
-    else if(enemyX > destinationX)
-      image(leftImg[0], enemyX, enemyY);
+    image(direction[0], enemyX, enemyY, 50, 50);
   }
-  
 }
