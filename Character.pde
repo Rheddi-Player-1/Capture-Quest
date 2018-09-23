@@ -11,6 +11,8 @@ class Character
   int j, k;
   PImage direction[];
   int vx, vy; // direction in -1,0,1 //
+  RectangleBoarder ninja;
+  RectangleBoarder[] rectangle = new RectangleBoarder[8];
 
   Character(int x, int y, int h, int w, int sp, int j, int wei)
   {
@@ -28,7 +30,8 @@ class Character
     rightImg = new PImage[9];
     direction = new PImage[9];
 
-    RectangleBoarder[] rectangle = new RectangleBoarder[8];
+    ninja = new RectangleBoarder(charXPos, charYPos, wide, tall);
+
 
     rectangle[0] = new RectangleBoarder(charXPos, charYPos, wide, tall);
     rectangle[1] = new RectangleBoarder(450, 0, 50, 1000);
@@ -38,12 +41,8 @@ class Character
     rectangle[5] = new RectangleBoarder(1100, 600, 400, 50);
     rectangle[6] = new RectangleBoarder(600, 800, 400, 50);
     rectangle[7] = new RectangleBoarder(500, 950, 1000, 50);
-    for (int i=1; i<8; i++) {
-      if (rectangle[0].ifCollide(rectangle[i])) {
-        vy=0;
-      } else
-        vy=10;
-    }
+
+
 
 
     for (int i = 0; i < rightImg.length; i++)
@@ -58,6 +57,16 @@ class Character
       leftImg[i] = loadImage("SeeSnakeMove/SnakeLeft" + i + ".gif");
     }
   }
+
+  void gravity() {
+    if (ninja.ifCollide(rectangle[3].getx1(), rectangle[3].gety1(), rectangle[3].getx2(), rectangle[3].gety2())) {
+      vy=0;
+      charYPos = charYPos + vy;
+    } else
+      vy=10;
+      charYPos = charYPos + vy;
+  }
+
 
   void updateWeight(int wei)
   {
@@ -85,6 +94,7 @@ class Character
       k = 0;
     }
     k++;
+
     redraw();
   }
 
@@ -98,6 +108,8 @@ class Character
       j = 1;
     }
     j++;
+
+
     redraw();
   }
 
@@ -106,6 +118,7 @@ class Character
     direction[0] = rightImg[0];
     j = 1;
     k = 0;
+
     redraw();
   }
 
@@ -114,6 +127,7 @@ class Character
     direction[0] = leftImg[8];
     j = 1;
     k = 0;
+
     redraw();
   }
 
@@ -126,6 +140,6 @@ class Character
   void initializeChar()
   {
     image(direction[0], charXPos, charYPos, wide, tall);
-    charYPos = charYPos + vy;
+
   }
 }
