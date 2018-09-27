@@ -1,5 +1,8 @@
+import processing.sound.*;
+
 RectangleBoarder[] rectangle;
 EnemyCharacter[] enemy;
+SoundFile bad;
 
 class Character
 {
@@ -16,6 +19,10 @@ class Character
   int jump=0;
   int left=0;
   int right=0;
+  
+ // SoundFile bad = new SoundFile(this, "bad_item_negsound.wav");
+
+  
 
 
   RectangleBoarder ninja;
@@ -52,9 +59,9 @@ class Character
     rectangle[5] = new RectangleBoarder(750, 800, 400, 50);
     rectangle[6] = new RectangleBoarder(500, 950, 1000, 50);
 
-    enemy[0] = new EnemyCharacter(820, 370, 1170, 370, 3);
-    enemy[1] = new EnemyCharacter(760, 770, 1140, 770, 4);
-    enemy[2] = new EnemyCharacter(1100, 570, 1450, 570, 5);
+    enemy[0] = new EnemyCharacter(820, 375, 1170, 370, 3);
+    enemy[1] = new EnemyCharacter(760, 775, 1140, 770, 7);
+    enemy[2] = new EnemyCharacter(1100, 575, 1450, 570, 5);
 
 
     for (int i = 0; i < rightImg.length; i++)
@@ -88,7 +95,7 @@ class Character
       charYPos = charYPos + vy;
       redraw();
     } else {
-      charYPos = charYPos -10;
+      charYPos = charYPos -15;
     }
   }
 
@@ -190,7 +197,7 @@ class Character
 
   void keyReleaseLeft()
   {
-    direction[0] = leftImg[8];
+    direction[0] = leftImg[0];
     j = 1;
     k = 0;
     //direction[0] = leftImg[k];
@@ -221,7 +228,7 @@ class Character
 
   void initializeChar()
   {
-    image(direction[0], charXPos, charYPos);
+    image(direction[0], charXPos, charYPos, tall, wide);
 
     //charXPos = charXPos + vx;
   }

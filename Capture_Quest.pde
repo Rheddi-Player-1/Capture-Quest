@@ -11,10 +11,10 @@ void setup()
 {
   background = loadImage("thiefBackground.png");
   title = new TitleScreen();
-  playChar = new Character(550, 50, 150, 100, 5, 20, 10);
+  playChar = new Character(550, 50, 50, 50, 5, 20, 10);
   plat = new Platform(1);
-  //file = new SoundFile(this,"theme.mp3");
-  //file.play();
+  SoundFile file = new SoundFile(this,"game_themesong.wav");
+  file.loop();
   size(2000, 1000);
 }
 

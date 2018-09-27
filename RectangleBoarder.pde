@@ -11,14 +11,14 @@ class RectangleBoarder {
   }
 
   boolean ifSupportBelow(int x1, int y1, int x2, int y2) {
-    if (this.x2-125>=x1 && this.x1<=x2 && this.y2>=y1+35 && this.y2<=y2 ) {
+    if (this.x2-25>=x1 && this.x1-30<=x2 && this.y2-15>=y1 && this.y2-15<=y2-45 ) {
       return true;
     } else
       return false;
   }
   
   boolean ifCollideLeft(int x2) {
-    if (this.x1<=x2+50 ) {
+    if (this.x1-30<=x2 ) {
       return true;
     } else
       return false;
@@ -26,7 +26,7 @@ class RectangleBoarder {
 
   
   boolean ifCollideRight(int x1) {
-    if (this.x2>=x1+100) {
+    if (this.x2>=x1+25) {
       return true;
     } else
       return false;
