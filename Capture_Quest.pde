@@ -2,18 +2,19 @@ import processing.sound.*;
 
 SoundFile file;
 Character playChar;
-EnemyCharacter enemy;
 Platform plat;
 TitleScreen title;
+PImage background;
+
 
 void setup()
 {
+  background = loadImage("thiefBackground.png");
   title = new TitleScreen();
-  playChar = new Character(500, 50, 150, 100, 10, 20, 10);
-  enemy = new EnemyCharacter(800, 370, 1150, 350, 5);
+  playChar = new Character(550, 50, 150, 100, 5, 20, 10);
   plat = new Platform(1);
-  file = new SoundFile(this,"theme.mp3");
-  file.play();
+  //file = new SoundFile(this,"theme.mp3");
+  //file.play();
   size(2000, 1000);
 }
 
@@ -21,15 +22,17 @@ void setup()
 void draw()
 {
   background(255, 255, 255);
+  image(background, 1000, 500);
   playChar.initializeChar();
-  enemy.moveEnemy();
-  enemy.initializeEnemy();
-
+  playChar.getEnemy();
   plat.position();
   title.showTitle();
 
 
   playChar.gravity();
+  playChar.moveCharLeft();
+  playChar.moveCharRight();
+  playChar.dodge();
 }
 
 void keyPressed() 
@@ -41,10 +44,15 @@ void keyPressed()
   {
     if (keyCode == RIGHT) 
     {
-      playChar.moveCharRight();
+      //playChar.moveCharRight();
+      playChar.right=1;
+    }
+    if (keyCode == UP) {
+      playChar.jump=1;
     } else if (keyCode == LEFT) 
     {
-      playChar.moveCharLeft();
+      //playChar.moveCharLeft();
+      playChar.left=1;
     }
   }
 }
@@ -53,8 +61,14 @@ void keyPressed()
 void keyReleased()
 {
 
-  if (keyCode == RIGHT) 
+  if (keyCode == RIGHT) {
     playChar.keyReleaseRight();
-  else if (keyCode == LEFT) 
+    playChar.right=0;
+  } else if (keyCode == LEFT) {
     playChar.keyReleaseLeft();
+    playChar.left=0;
+  }
+  if (keyCode == UP) {
+    playChar.jump=0;
+  }
 }

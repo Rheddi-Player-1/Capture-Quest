@@ -11,7 +11,7 @@ class TitleScreen
 
   {
 
-    title = loadImage("CaptureQuest.png");
+    title = loadImage("titleScreen.gif");
   }
 
   void showTitle()
@@ -22,11 +22,7 @@ class TitleScreen
 
     image(title, x, y);
 
-    textMode(CENTER);
 
-    textSize(55);
-
-    text("PRESS ENTER", 800, 900);
 
       fill(0);
   }

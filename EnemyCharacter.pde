@@ -8,6 +8,7 @@ class EnemyCharacter
   int destinationX;
   int destinationY;
   int moveSpeed;
+  int speed;
   int left, right;
 
   EnemyCharacter(int x, int y, int dX, int dY, int sp)
@@ -21,6 +22,7 @@ class EnemyCharacter
     destinationX = dX;
     destinationY = dY;
     moveSpeed = sp;
+    speed = sp;
     left = enemyX;
     right = destinationX;
 
@@ -46,15 +48,15 @@ class EnemyCharacter
 
     enemyX = enemyX + moveSpeed;
     direction[0] = rightImg[i];
-    if (i == leftImg.length-1)
+    if (i == rightImg.length-1)
       i = 1;
     else
       i++;
 
     if (enemyX > right) {
-      moveSpeed = -5;
+      moveSpeed = -speed;
       direction[0] = leftImg[j];
-      if (j == rightImg.length-1)
+      if (j == leftImg.length-1)
         j = 1;
       else
         j++;
@@ -63,9 +65,9 @@ class EnemyCharacter
 
     if (enemyX < left)
     {
-      moveSpeed = 5;
+      moveSpeed = speed;
       direction[0] = rightImg[i];
-      if (i == leftImg.length-1)
+      if (i == rightImg.length-1)
         i = 1;
       else
         i++;
