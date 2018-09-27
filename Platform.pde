@@ -1,14 +1,15 @@
 
 
 class Platform {
-  PImage Img;
+  PImage img1 = loadImage("thiefPlatform.png");
+  PImage img2 = loadImage("thiefPlatformTopBot.png");
+  PImage img3 = loadImage("thiefPlatformSides.png");
   int platXPos, platYPos;
   int platLength, platHeight;
   int level;
 
   Platform(int l) {
     level = l;
-
   }
 
 
@@ -16,14 +17,14 @@ class Platform {
 
   void position() {
     fill(240, 240, 240);
-    rect(450, 0, 50, 1000);
-    rect(1500, 0, 50, 1000);
+    image(img3, 450+25, 0+500);
+    image(img3, 1500+25, 0+500);
     if (level==1) {
-      rect(500, 200, 400, 50);
-      rect(800, 400, 400, 50);
-      rect(1100, 600, 400, 50);
-      rect(750, 800, 400, 50);
-      rect(500, 950, 1000, 50);
+      image(img1, 500+200, 200+25);
+      image(img1, 800+200, 400+25);
+      image(img1, 1100+200, 600+25);
+      image(img1, 750+200, 800+25);
+      image(img2, 500+500, 950+25);
     }
   }
 }
