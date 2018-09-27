@@ -37,9 +37,9 @@ class Character
     highLimit = charYPos - 50;
     lowLimit = charYPos;    
 
-    leftImg = new PImage[9];
-    rightImg = new PImage[9];
-    direction = new PImage[9];
+    leftImg = new PImage[4];
+    rightImg = new PImage[4];
+    direction = new PImage[4];
 
 
 
@@ -59,14 +59,14 @@ class Character
 
     for (int i = 0; i < rightImg.length; i++)
     {
-      rightImg[i] = loadImage("SeeSnakeMove/Snake" + i + ".gif");
+      rightImg[i] = loadImage("thiefRight" + i + ".gif");
     }
 
     direction[0] = rightImg[0];
 
     for (int i = 0; i < leftImg.length; i++)
     {
-      leftImg[i] = loadImage("SeeSnakeMove/SnakeLeft" + i + ".gif");
+      leftImg[i] = loadImage("thiefLeft" + i + ".gif");
     }
   }
 
@@ -221,7 +221,7 @@ class Character
 
   void initializeChar()
   {
-    image(direction[0], charXPos, charYPos, wide, tall);
+    image(direction[0], charXPos, charYPos);
 
     //charXPos = charXPos + vx;
   }
