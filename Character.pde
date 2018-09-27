@@ -59,14 +59,14 @@ class Character
 
     for (int i = 0; i < rightImg.length; i++)
     {
-      rightImg[i] = loadImage("thiefRight" + i + ".gif");
+      rightImg[i] = loadImage("thiefRight" + i + ".png");
     }
 
     direction[0] = rightImg[0];
 
     for (int i = 0; i < leftImg.length; i++)
     {
-      leftImg[i] = loadImage("thiefLeft" + i + ".gif");
+      leftImg[i] = loadImage("thiefLeft" + i + ".png");
     }
   }
 
