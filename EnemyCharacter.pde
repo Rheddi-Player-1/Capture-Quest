@@ -1,8 +1,8 @@
 class EnemyCharacter 
 {
-  PImage leftImg[];
-  PImage rightImg[];
-  PImage direction[];
+  //PImage leftImg[];
+  //PImage rightImg[];
+  PImage direction;
   int enemyX;
   int enemyY;
   int destinationX;
@@ -13,9 +13,9 @@ class EnemyCharacter
 
   EnemyCharacter(int x, int y, int dX, int dY, int sp)
   {
-    leftImg = new PImage[4];
-    rightImg = new PImage[4];
-    direction = new PImage[4];
+    //leftImg = new PImage[4];
+    //rightImg = new PImage[4];
+    //direction = new PImage[4];
 
     enemyX = x;
     enemyY = y;
@@ -26,12 +26,12 @@ class EnemyCharacter
     left = enemyX;
     right = destinationX;
 
-    for (int i = 0; i < leftImg.length; i++)
-      leftImg[i] = loadImage("Enemy/EnemyLeft" + i + ".png");
-    for (int i = 0; i < rightImg.length; i++)
-      rightImg[i] = loadImage("Enemy/EnemyRight" + i + ".png");
+    //for (int i = 0; i < leftImg.length; i++)
+    //  leftImg[i] = loadImage("Enemy/EnemyLeft" + i + ".png");
+    //for (int i = 0; i < rightImg.length; i++)
+    //  rightImg[i] = loadImage("Enemy/EnemyRight" + i + ".png");
 
-    direction[0] = rightImg[0];
+    direction = loadImage("Cop.png");
   }
 
   void setEnemySpeed(int sp)
@@ -47,7 +47,7 @@ class EnemyCharacter
     int j = 1;
 
     enemyX = enemyX + moveSpeed;
-    direction[0] = rightImg[i];
+    //direction[0] = rightImg[i];
     if (i == rightImg.length-1)
       i = 1;
     else
@@ -55,7 +55,7 @@ class EnemyCharacter
 
     if (enemyX > right) {
       moveSpeed = -speed;
-      direction[0] = leftImg[j];
+      //direction[0] = leftImg[j];
       if (j == leftImg.length-1)
         j = 1;
       else
@@ -66,7 +66,7 @@ class EnemyCharacter
     if (enemyX < left)
     {
       moveSpeed = speed;
-      direction[0] = rightImg[i];
+      //direction[0] = rightImg[i];
       if (i == rightImg.length-1)
         i = 1;
       else
@@ -78,6 +78,6 @@ class EnemyCharacter
 
   void initializeEnemy()
   {
-    image(direction[0], enemyX, enemyY, 50, 50);
+    image(direction, enemyX, enemyY, 50, 50);
   }
 }
