@@ -43,23 +43,23 @@ class EnemyCharacter
   {
 
 
-    int i = 1;
-    int j = 1;
+    //int i = 1;
+    //int j = 1;
 
     enemyX = enemyX + moveSpeed;
     //direction[0] = rightImg[i];
-    if (i == rightImg.length-1)
-      i = 1;
-    else
-      i++;
+    //if (i == rightImg.length-1)
+      //i = 1;
+    //else
+      //i++;
 
     if (enemyX > right) {
       moveSpeed = -speed;
       //direction[0] = leftImg[j];
-      if (j == leftImg.length-1)
-        j = 1;
-      else
-        j++;
+      //if (j == leftImg.length-1)
+        //j = 1;
+      //else
+        //j++;
       redraw();
     }
 
@@ -67,10 +67,10 @@ class EnemyCharacter
     {
       moveSpeed = speed;
       //direction[0] = rightImg[i];
-      if (i == rightImg.length-1)
-        i = 1;
-      else
-        i++;
+      //if (i == rightImg.length-1)
+        //i = 1;
+      //else
+        //i++;
       redraw();
     }
   }
