@@ -19,10 +19,14 @@ class Character
   int jump=0;
   int left=0;
   int right=0;
-  
- // SoundFile bad = new SoundFile(this, "bad_item_negsound.wav");
+  int limit;
+  int life=5;
+  int goldKey=0;
+  int points=500;
 
-  
+  // SoundFile bad = new SoundFile(this, "bad_item_negsound.wav");
+
+
 
 
   RectangleBoarder ninja;
@@ -43,6 +47,7 @@ class Character
     k = 0;
     highLimit = charYPos - 50;
     lowLimit = charYPos;    
+
 
     leftImg = new PImage[4];
     rightImg = new PImage[4];
@@ -79,6 +84,7 @@ class Character
 
   void gravity() {
     ninja = new RectangleBoarder(charXPos, charYPos, tall, wide);
+
     // System.out.println(ninja.x1 + "," + ninja.x2 + ", " + ninja.y2);
     if (jump==0) {
       for (int i=2; i<=6; i++) {
@@ -95,7 +101,15 @@ class Character
       charYPos = charYPos + vy;
       redraw();
     } else {
+      //System.out.println("y: " + rectangle[2].gety1());
       charYPos = charYPos -15;
+      for (int i=2; i<=6; i++) {
+        
+        if (charYPos<rectangle[i].gety1()+20 && charYPos>=rectangle[i].gety1()) {
+          jump=0;
+        }
+
+      }
     }
   }
 
@@ -103,8 +117,17 @@ class Character
     ninja = new RectangleBoarder(charXPos, charYPos, tall, wide);
     for (int i=0; i<=2; i++) {
       if (ifTouch(charXPos, charYPos, enemy[i].enemyX, enemy[i].enemyY)) {
+        life--;
+        points-=100;
+        if(life>0){
         charXPos = 550;
-        charYPos = 50;
+        charYPos = 50;}
+        else{
+          charXPos = 2300;
+          
+        }
+        
+        
         redraw();
         return;
       }

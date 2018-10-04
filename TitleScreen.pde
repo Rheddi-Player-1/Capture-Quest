@@ -37,4 +37,9 @@ class TitleScreen
     x=4000;
     redraw();
   }
+  
+  void restart(){
+    x=1000;
+    y=500;
+  }
 }
