@@ -9,14 +9,19 @@ PImage background;
 
 void setup()
 {
+  reset();
+  SoundFile file = new SoundFile(this,"game_themesong.wav");
+  file.loop();
+  size(2000, 1000);
+}
+
+void reset()
+{
   background = loadImage("thiefBackground.png");
   title = new TitleScreen();
   playChar = new Character(550, 50, 50, 50, 5, 20, 10);
   playChar2 = new Character(600, 50, 50, 50, 5, 20, 10);
   plat = new Platform(1);
-  SoundFile file = new SoundFile(this,"game_themesong.wav");
-  file.loop();
-  size(2000, 1000);
 }
 
 
@@ -52,7 +57,7 @@ void draw()
   
   /* reset the game.
   if(playChar.life==0 && playChar2.life==0){
-    title.restart();
+    reset();
   }*/
 
 
