@@ -133,6 +133,12 @@ class Character
       }
     }
   }
+  
+  void getKey() {
+    if (ifTouch(charXPos, charYPos, 1400, 550)) {
+      goldKey = 1;
+     }
+  }
 
 
   // x1,y1 is ninja,   x2,y2 is enemy
