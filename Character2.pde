@@ -1,10 +1,8 @@
 import processing.sound.*;
 
-RectangleBoarder[] rectangle;
-EnemyCharacter[] enemy;
-SoundFile bad;
 
-class Character
+
+class Character2
 {
   PImage leftImg[];
   PImage rightImg[];
@@ -35,7 +33,7 @@ class Character
   EnemyCharacter[] enemy = new EnemyCharacter[3];
   java.util.Scanner input = new java.util.Scanner(System.in);
 
-  Character(int x, int y, int h, int w, int sp, int j, int wei)
+  Character2(int x, int y, int h, int w, int sp, int j, int wei)
   {
     charXPos = x;
     charYPos = y;
@@ -83,20 +81,16 @@ class Character
     }
 
 
-
-
-
-
     for (int i = 0; i < rightImg.length; i++)
     {
-      rightImg[i] = loadImage("thiefRight" + i + ".png");
+      rightImg[i] = loadImage("wizardRight" + i + ".png");
     }
 
     direction[0] = rightImg[0];
 
     for (int i = 0; i < leftImg.length; i++)
     {
-      leftImg[i] = loadImage("thiefLeft" + i + ".png");
+      leftImg[i] = loadImage("wizardLeft" + i + ".png");
     }
   }
 
@@ -122,10 +116,11 @@ class Character
       //System.out.println("y: " + rectangle[2].gety1());
       charYPos = charYPos -15;
       for (int i=2; i<=6; i++) {
-
+        
         if (charYPos<rectangle[i].gety1()+20 && charYPos>=rectangle[i].gety1()) {
           jump=0;
         }
+
       }
     }
   }
@@ -136,31 +131,32 @@ class Character
       if (ifTouch(charXPos, charYPos, enemy[i].enemyX, enemy[i].enemyY)) {
         life--;
         points-=100;
-        if (life>0) {
-          charXPos = 550;
-          charYPos = 50;
-        } else {
+        if(life>0){
+        charXPos = 550;
+        charYPos = 50;}
+        else{
           charXPos = 2300;
+          
         }
-
-
+        
+        
         redraw();
         return;
       }
     }
   }
-
+  
   void getKey() {
     if (ifTouch(charXPos, charYPos, 1400, 555)) {
       goldKey = 1;
-    }
+     }
   }
-
+  
   void win() {
     if (ifTouch(charXPos, charYPos, 1450, 920) && goldKey ==1) {
       win +=1;
       goldKey-=1;
- //    level+=1;
+      level+=1;
       alive=1;
     }
   }

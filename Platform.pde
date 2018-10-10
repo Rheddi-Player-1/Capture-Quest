@@ -26,5 +26,12 @@ class Platform {
       image(img1, 750+200, 800+25);
       image(img2, 500+500, 950+25);
     }
+    if (level==2) {
+      image(img1, 500+200, 200+25);
+      image(img1, 800+200, 400+25);
+      image(img1, 1100+200, 600+25);
+      image(img1, 850+200, 800+25);
+      image(img2, 500+500, 950+25);
+    }
   }
 }
