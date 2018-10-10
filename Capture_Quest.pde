@@ -1,11 +1,14 @@
 import processing.sound.*;
 
 SoundFile file;
-Character playChar, playChar2;
+Character playChar;
+Character2 playChar2;
 Platform plat;
 TitleScreen title;
 PImage background;
 float gkeyX, gkeyY;
+int level=1;
+int alive=0;
 
 
 void setup()
@@ -14,27 +17,35 @@ void setup()
   SoundFile file = new SoundFile(this, "game_themesong.wav");
   file.loop();
   size(2000, 1000);
+  title = new TitleScreen();
+  //image(background, 1000, 500);
+  //title.showTitle();
 }
 
 void reset()
 {
   background = loadImage("thiefBackground.png");
-  title = new TitleScreen();
-  playChar = new Character(550, 50, 50, 50, 5, 20, 10);
-  playChar2 = new Character(600, 50, 50, 50, 5, 20, 10);
+  if (alive==0) {
+    title = new TitleScreen();
+  }
 
-  plat = new Platform(1);
+  playChar = new Character(550, 50, 50, 50, 5, 20, 10);
+  playChar2 = new Character2(600, 50, 50, 50, 5, 20, 10);
+  //image(background, 1000, 500);
+  //title.showTitle();
+  plat = new Platform(level);
 }
 
 
 void draw()
 {
   background(255, 255, 255);
+
   image(background, 1000, 500);
   playChar.initializeChar();
   playChar2.initializeChar();
-  if (playChar.goldKey==0 || playChar2.goldKey==0) {
-    image(loadImage("key.png"), gkeyX=1400, gkeyY=550);
+  if (playChar.goldKey==0 && playChar2.goldKey==0) {
+    image(loadImage("key.png"), gkeyX=1400, gkeyY=555);
   }
 
   //text:
@@ -53,6 +64,8 @@ void draw()
   text("player2 keys: "+playChar2.goldKey, 1600, 650);
   text("player1 Points: "+playChar.points, 100, 700);
   text("player1 Points: "+playChar2.points, 1600, 700);
+  text("Current level: "+level, 100, 800);
+  text("player1 Win: "+playChar.win, 100, 900);
 
   playChar.getEnemy();
   playChar2.getEnemy();
@@ -61,9 +74,16 @@ void draw()
 
 
   // reset the game.
-  if (playChar.life==0 && playChar2.life==0) {
+  if ((playChar.life==0 && playChar2.life==0) || (playChar.win==3||playChar2.win==3)) {
     reset();
   }
+
+  if (level==1 && (playChar.win==1||playChar2.win==1)) {
+    level=2;
+    alive=1;
+    reset();
+  }
+
 
 
   playChar.gravity();
@@ -71,12 +91,14 @@ void draw()
   playChar.moveCharRight();
   playChar.dodge();
   playChar.getKey();
+  playChar.win();
 
   playChar2.gravity();
   playChar2.moveCharLeft();
   playChar2.moveCharRight();
   playChar2.dodge();
   playChar2.getKey();
+  playChar2.win();
 }
 
 void keyPressed() 
@@ -84,9 +106,15 @@ void keyPressed()
   if (key == ENTER) {
     title.clearTitle();
   }
+  if (key ==TAB) {
+    reset();
+  }
 
   if (key == CODED) 
   {
+    if (keyCode==49) {
+      reset();
+    }
     if (keyCode == RIGHT) 
     {
       //playChar.moveCharRight();
